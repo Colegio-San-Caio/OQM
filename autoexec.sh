@@ -2,7 +2,8 @@
 # ========================================================================
 # Script   : autoexec.sh (OMQbiosReader Startup Hook)
 # System   : cURLoeneyeOMQ Hybrid Quantum & Structural FEA Framework
-# Purpose  : Automatically initialize and execute system utilities on boot
+# Purpose  : Automatically initialize and execute system utilities and
+#            OMQ.FNT frame buffer rendering sweeps on boot.
 # ========================================================================
 
 echo "=== Executing OMQbiosReader Autoexec Routine ==="
@@ -27,6 +28,14 @@ elif [ -f "./oeneyecat.pas" ]; then
     fi
 else
     echo "Warning: oeneyecat binary or source not found."
+fi
+
+echo ""
+echo "=== Triggering OMQ.FNT Frame Buffer Display Engine ==="
+if [ -f "./omq_display_bridge.sh" ]; then
+    bash ./omq_display_bridge.sh
+else
+    echo "Warning: omq_display_bridge.sh not found."
 fi
 
 echo "=== Autoexec Sequence Complete ==="
