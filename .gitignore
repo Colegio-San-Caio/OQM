@@ -4,6 +4,10 @@
 GIT/
 oeneyeOScat.GIT/
 submodules/GIT/
-submodules/L3WWZ76K1-/
 audit_daemon.log
 auto_run_audit.sh
+*.o
+*.so
+kernel.elf
+mem_upper
+qiskit-main.zip
