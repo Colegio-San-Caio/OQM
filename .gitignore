@@ -1,32 +1,32 @@
-.env
-*.log
-*.ima
-GIT/
-oeneyeOScat.GIT/
-submodules/GIT/
-audit_daemon.log
-auto_run_audit.sh
-*.o
-*.so
-kernel.elf
-mem_upper
-qiskit-main.zip
-qenv/
-__pycache__/
-*.pyc
-repo-activity.xml
-*.bin
+# C/C++ builds SEED 12783
+c_main
+cpp_main
 *.o
 *.so
 *.elf
-*.img
-*.zip
+*.bin
 *.log
 *.ima
+*.zip
+mem_upper
+kmain
+loader
+vmm
+pmm
+kernel
+termuxDB
+OQM_file
+
+# Python / env
 qenv/
 __pycache__/
 *.pyc
+
+# GIT leaks
 GIT/
 oeneyeOScat.GIT/
 submodules/GIT/
-submodules/L3WWZ76K1-/
+.env
+
+# OS
+.DS_Store
