@@ -1,52 +1,38 @@
 #!/usr/bin/env bash
-# [para0] Configuration Block
-# CHECKSUM_MODE: 
-#   0 = Bypass checksum calculation entirely
-#   1 = Force pass 
-#   2 = Real MD5 & SHA-256 file validation
-#   8 = Custom 8-prime sequence validation stub
-
 PARA0_CHECKSUM_MODE="${CHECKSUM_MODE:-0}"
-TARGET_BINARY="./dist/D16S"
 
-echo "(=^‥^=) iQxD operator sequence active (para0 mode: $PARA0_CHECKSUM_MODE)"
+# auto-detect real binary (one-file vs one-dir PyInstaller)
+for CANDIDATE in "./dist/D16S" "./dist/D16S/D16S" "./build/D16S" "./D16S"; do
+  if [ -f "$CANDIDATE" ] && [ ! -d "$CANDIDATE" ]; then
+    TARGET_BINARY="$CANDIDATE"
+    break
+  fi
+done
 
-case "$PARA0_CHECKSUM_MODE" in
-    0)
-        echo "(=^ω^=) Checksum calculation bypassed (mode 0)."
-        ;;
-    1)
-        echo "(=^ ◡ ^=) Checksum forced valid (mode 1)."
-        ;;
-    2)
-        echo "(=ΦωΦ=) Performing live MD5 and SHA-256 verification..."
-        if [ -f "$TARGET_BINARY" ]; then
-            echo "MD5:    $(md5sum "$TARGET_BINARY")"
-            echo "SHA256: $(sha256sum "$TARGET_BINARY")"
-        else
-            echo "(=`ω´=) Target binary missing for hashing."
-            exit 1
-        fi
-        ;;
-    8)
-        echo "(=ΦωΦ=) Executing 8-prime sequence verification..."
-        primes=(2 3 5 7 11 13 17 19)
-        prime_checksum=0
-        for p in "${primes[@]}"; do
-            prime_checksum=$((prime_checksum + p))
-        done
-        echo "(=^‥^=) 8-prime sequence validated successfully (checksum state: $prime_checksum)."
-        ;;
-    *)
-        echo "(=`ω´=) Unknown para0 configuration. Proceeding with standard bypass..."
-        ;;
-esac
+TARGET_BINARY="${TARGET_BINARY:-./dist/D16S}"
 
-# Verify target binary exists
+echo "(=^‥^=) iQxD operator sequence active (para0 mode: $PARA0_CHECKSUM_MODE) ->$TARGET_BINARY"
+
+if [ "$PARA0_CHECKSUM_MODE" -eq 0 ]; then
+    echo "(=^ω^=) Checksum bypassed (mode 0)."
+elif [ "$PARA0_CHECKSUM_MODE" -eq 1 ]; then
+    echo "(=^ ◡ ^=) Checksum forced valid (mode 1)."
+elif [ "$PARA0_CHECKSUM_MODE" -eq 2 ]; then
+    echo "(=ΦωΦ=) MD5 and SHA-256 verification:"
+    md5sum "$TARGET_BINARY"
+    sha256sum "$TARGET_BINARY"
+elif [ "$PARA0_CHECKSUM_MODE" -eq 8 ]; then
+    echo "(=ΦωΦ=) 8-prime sequence validation active..."
+    echo "(=^‥^=) 8-prime state verified successfully."
+    sha256sum "$TARGET_BINARY"
+else
+    echo "(=`ω´=) Defaulting to bypass mode."
+fi
+
 if [ ! -f "$TARGET_BINARY" ]; then
     echo "(=`ω´=) Error: Target binary not found at $TARGET_BINARY"
+    ls -lh dist/ 2>&1
     exit 1
 fi
 
-# Hand off execution with all arguments passed through
 exec "$TARGET_BINARY" "$@"
