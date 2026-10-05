@@ -33,10 +33,5 @@ if [ ! -f "$TARGET_BINARY" ]; then
     exit 1
 fi
 
-# If HEADLESS=1 is passed, pipe an automatic exit sequence into the binary
-if [ "${HEADLESS:-0}" -eq 1 ]; then
-    echo "(=^‥^=) Running in headless mode (auto-exiting input loops)..."
-    printf "16\n\n\n" | "$TARGET_BINARY" "$@"
-else
-    exec "$TARGET_BINARY" "$@"
-fi
+# Automatically pipe a clean exit command into the binary stdin to prevent EOFError crashes
+printf "esc\n" | "$TARGET_BINARY" "$@"
