@@ -1,4 +1,12 @@
-program OMQbiosReaderTimeLog;
+{ ========================================================================
+  Unit: Time_Log (Pascal / OMQbiosReader Specification & Implementation)
+  System : cURLoeneyeOMQ Hybrid Quantum & Structural FEA Framework
+  Purpose: High-integrity execution log and Phi-scaled timestamp management
+  ======================================================================== }
+
+unit Time_Log;
+
+interface
 
 type
    ExecutionState = (Verified, Warning, Fault);
@@ -9,6 +17,11 @@ type
       PhiScaling       : Double;
       ActiveSubsystem  : string[30];
    end;
+
+function Get_Current_Log: SystemExecutionRecord;
+procedure Print_Execution_Summary;
+
+implementation
 
 function Get_Current_Log: SystemExecutionRecord;
 var
@@ -34,6 +47,4 @@ begin
    Writeln('Pipeline Status  : SUCCESS');
 end;
 
-begin
-   Print_Execution_Summary;
 end.
