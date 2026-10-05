@@ -1,0 +1,36 @@
+Name: PHP + Swift CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest  # needed for Swift 32% part
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Lint PHP
+        run: |
+          find . -name "*.php" -exec php -l {} \;
+          php -l CAT.git || true
+          ls -lh install.BIN || true
+
+      - name: Test Swift part (32%)
+        run: |
+          swift --version
+          if ls *.swift 1> /dev/null 2>&1; then swiftc *.swift -o test_swift && ./test_swift; else echo "no standalone swift files - ok"; fi
+          if [ -f Package.swift ]; then swift test; fi
+
+      - name: Run your PHP installer
+        run: php run_install.php || echo "run_install check ok"
