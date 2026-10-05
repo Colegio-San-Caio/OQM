@@ -18,3 +18,6 @@ echo "[5] Executing ORNOP.EXE Binary..."
 ./ORNOP.EXE
 
 echo "=== All Systems Verified: SUCCESS ==="
+
+echo "=== Running OMQ Punch-to-Nastran FEA Bridge ==="
+python3 omq_punch_nastran_bridge.py
