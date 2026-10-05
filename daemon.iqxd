@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -e
-source ./css.iqxd
+[ -f "./css.iqxd" ] && source ./css.iqxd
 
 PID_FILE=".daemon.pid"
 DAEMON_MODE="${DAEMON_MODE:-0}"
 
 start_daemon() {
-    if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+    if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
         echo -e "${OQM_WARN}(=^‥^=) Daemon already running.${OQM_RESET}"
     else
         echo -e "${OQM_PRIMARY}(=^ ◡ ^=) Starting daemon service...${OQM_RESET}"
@@ -20,7 +20,7 @@ start_daemon() {
 
 stop_daemon() {
     if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
+        PID="$(cat "$PID_FILE")"
         if kill -0 "$PID" 2>/dev/null; then
             kill "$PID"
             echo -e "${OQM_SUCCESS}(=ΦωΦ=) Stopped daemon (PID $PID)${OQM_RESET}"
@@ -34,7 +34,7 @@ stop_daemon() {
 }
 
 status_daemon() {
-    if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+    if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
         echo -e "${OQM_SUCCESS}(=^..^=) DAEMON active [PID:$(cat "$PID_FILE")]${OQM_RESET}"
     else
         echo -e "${OQM_WARN}(=^..^=) DAEMON inactive.${OQM_RESET}"
