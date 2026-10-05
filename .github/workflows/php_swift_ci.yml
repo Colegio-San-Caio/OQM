@@ -1,4 +1,4 @@
-Name: PHP + Swift CI
+name: PHP + Swift CI
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # needed for Swift 32% part
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
         with:
