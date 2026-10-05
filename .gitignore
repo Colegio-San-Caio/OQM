@@ -1,4 +1,4 @@
-# C/C++ builds SEED 12783
+# C/C++ SEED 12783
 c_main
 cpp_main
 *.o
@@ -16,13 +16,15 @@ pmm
 kernel
 termuxDB
 OQM_file
+OQM_file.bin
+kernel.elf
 
 # Python / env
 qenv/
 __pycache__/
 *.pyc
 
-# GIT leaks
+# GIT leaks / submodules internal
 GIT/
 oeneyeOScat.GIT/
 submodules/GIT/
@@ -30,3 +32,4 @@ submodules/GIT/
 
 # OS
 .DS_Store
+.build/
