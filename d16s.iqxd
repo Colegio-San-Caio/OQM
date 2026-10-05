@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 PARA0_CHECKSUM_MODE="${CHECKSUM_MODE:-0}"
 
-# auto-detect real binary (one-file vs one-dir PyInstaller)
 for CANDIDATE in "./dist/D16S" "./dist/D16S/D16S" "./build/D16S" "./D16S"; do
   if [ -f "$CANDIDATE" ] && [ ! -d "$CANDIDATE" ]; then
     TARGET_BINARY="$CANDIDATE"
@@ -31,8 +30,13 @@ fi
 
 if [ ! -f "$TARGET_BINARY" ]; then
     echo "(=`ω´=) Error: Target binary not found at $TARGET_BINARY"
-    ls -lh dist/ 2>&1
     exit 1
 fi
 
-exec "$TARGET_BINARY" "$@"
+# If HEADLESS=1 is passed, pipe an automatic exit sequence into the binary
+if [ "${HEADLESS:-0}" -eq 1 ]; then
+    echo "(=^‥^=) Running in headless mode (auto-exiting input loops)..."
+    printf "16\n\n\n" | "$TARGET_BINARY" "$@"
+else
+    exec "$TARGET_BINARY" "$@"
+fi
