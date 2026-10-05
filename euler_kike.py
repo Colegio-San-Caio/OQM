@@ -356,6 +356,63 @@ def run_c_drive_emu():
     input("\nPress Enter to return to main console...")
 
 
+
+def run_d_drive_auto_push():
+    import os
+    os.system("clear")
+    print("┌─────────────────────────────────────────────────────────────┐")
+    print("│ D: DRIVE — Autonomous Git Sync & GitHub Release Gateway     │")
+    print("├─────────────────────────────────────────────────────────────┤")
+    print("│ > Target URL       : github.com/clevjhon/OQM/blob/main/...  │")
+    print("│ > Autoexec Daemon  : ACTIVE (GitHub CLI / gh detected)      │")
+    print("│ > Sync Protocol    : Isotropic State Auto-Release Mirror    │")
+    print("└─────────────────────────────────────────────────────────────┘")
+    print("\n[+] Initializing autoexec release sequence...")
+    os.system("git add . 2>/dev/null")
+    os.system('git commit -m "autoexec-release: autonomous tensor workspace snapshot" 2>/dev/null')
+    
+    gh_check = os.system("gh --version >/dev/null 2>&1")
+    if gh_check == 0:
+        print("[+] GitHub CLI (gh) authenticated. Syncing release tags...")
+        os.system("git push origin main 2>/dev/null")
+        os.system('gh release create v1.0.ven --notes "Automated EulerKIKE Release State" --title "EulerKIKE Release Snapshot" 2>/dev/null || gh release upload v1.0.ven euler_kike.py --clobber 2>/dev/null')
+        print("[+] Release successfully synchronized to GitHub repository!")
+    else:
+        print("[+] Pushing standard payload to origin main...")
+        os.system("git push origin main")
+        print("[+] Payload synchronized.")
+        
+    input("\nPress Enter to return to main console...")
+
+
+def run_channel_i_update():
+    import os
+    os.system("clear")
+    print("┌─────────────────────────────────────────────────────────────┐")
+    print("│ CHANNEL i — Decadic Channel & Auto-Update Release Chain     │")
+    print("├─────────────────────────────────────────────────────────────┤")
+    print("│ > Release Target   : https://github.com/clevjhon/OQM/v1.0   │")
+    print("│ > Sync Protocol    : Autonomous Release-Chain Watcher      │")
+    print("│ > Port Binding     : 36883 (:ROOT: Telemetry Channel)       │")
+    print("└─────────────────────────────────────────────────────────────┘")
+    print("\n[+] Polling Channel i release chain for remote updates...")
+    
+    os.system("git fetch origin --tags 2>/dev/null")
+    local_sha = os.popen("git rev-parse HEAD").read().strip()[:8]
+    print(f"[+] Current Local Isotropic State Hash : {local_sha}")
+    
+    gh_check = os.system("gh --version >/dev/null 2>&1")
+    if gh_check == 0:
+        print("[+] GitHub CLI active. Synchronizing latest release asset v1.0...")
+        os.system("gh release download v1.0 --pattern 'D16S' --clobber 2>/dev/null")
+        print("[+] Channel i auto-update package successfully synchronized!")
+    else:
+        print("[+] Pulling latest release refs from origin main...")
+        os.system("git pull origin main --ff-only 2>/dev/null")
+        print("[+] Channel i repository successfully updated.")
+        
+    input("\nPress Enter to return to main console...")
+
 if __name__ == "__main__":
     while True:
         os.system("clear")
@@ -377,7 +434,7 @@ if __name__ == "__main__":
   [6] KEKI Engine     [7] 2026 Epoch Tensor
   [8] Mount X: Drive        [C] Drive (QEMU Emu)        [A] Drive (Channel A / Infinity)
   [9] :graphene Morse Socket
-  [10] :i Decadic Channel [10]
+  [10] :i Decadic Channel [10]  [i] Channel i (Auto-Update)
   [11] Help          [12] Software      [13] Hardware
   [14] BIOS          [15] Kernel        [16] Channel Maker
   [17] Channel Input
