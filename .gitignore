@@ -11,3 +11,7 @@ auto_run_audit.sh
 kernel.elf
 mem_upper
 qiskit-main.zip
+qenv/
+__pycache__/
+*.pyc
+repo-activity.xml
