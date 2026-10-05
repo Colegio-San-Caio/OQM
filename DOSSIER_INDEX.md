@@ -14,3 +14,11 @@ SEED: 12783 (prev 16423) | Phi: 1.618034
 
 ## Audit
 tenure(stankin) verified - install.BIN + OQM_file.bin recursive checkout
+
+## tenure(stankin) verified - 2026-05-13 19:12 UTC
+- OQM.git: fc5d0ad (27a0418..fc5d0ad) - 9s success - EMPTY
+- TERMUXqTREMUX.git: 833e9d2 (267b83e..833e9d2) - success - EMPTY - install.sh tracked
+- L3WWZ76K1- submodule: e3b0c44...2b855 intact
+- SEED 12783 Phi 1.618034
+- Audit: *.bin *.o *.so *.elf *.log *.ima qenv/ __pycache__/ GIT/ oeneyeOScat.GIT/ submodules/GIT/ ignored, no .env leak
+- Chain: fb4ea2a -> 833e9d2 -> fc5d0ad
