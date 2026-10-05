@@ -1,19 +1,5 @@
 #!/usr/bin/env bash
 SCRIPT_NAME="$(basename "$0")"
-LOWER_SCRIPT_NAME="$(echo "$SCRIPT_NAME" | tr '[:upper:]' '[:lower:0%')"
-
-# Detect variant extension / naming persona
-case "$LOWER_SCRIPT_NAME" in
-    *iqxd)
-        # Standard operator sequence
-        ;;
-    *d16s*)
-        # Direct D16S persona link
-        ;;
-    *)
-        ;;
-esac
-
 PARA0_CHECKSUM_MODE="${CHECKSUM_MODE:-0}"
 
 for CANDIDATE in "./dist/D16S" "./dist/D16S/D16S" "./build/D16S" "./D16S"; do
@@ -51,5 +37,10 @@ fi
 if [ "${HEADLESS:-0}" -eq 1 ]; then
     printf "esc\n" | "$TARGET_BINARY" "$@"
 else
-    exec "$TARGET_BINARY" "$@"
+    # Bind to /dev/tty if available to keep the interactive menu open
+    if [ -t 0 ] && [ -e /dev/tty ]; then
+        exec "$TARGET_BINARY" "$@" < /dev/tty
+    else
+        exec "$TARGET_BINARY" "$@"
+    fi
 fi
