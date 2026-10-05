@@ -1,4 +1,19 @@
 #!/usr/bin/env bash
+SCRIPT_NAME="$(basename "$0")"
+LOWER_SCRIPT_NAME="$(echo "$SCRIPT_NAME" | tr '[:upper:]' '[:lower:0%')"
+
+# Detect variant extension / naming persona
+case "$LOWER_SCRIPT_NAME" in
+    *iqxd)
+        # Standard operator sequence
+        ;;
+    *d16s*)
+        # Direct D16S persona link
+        ;;
+    *)
+        ;;
+esac
+
 PARA0_CHECKSUM_MODE="${CHECKSUM_MODE:-0}"
 
 for CANDIDATE in "./dist/D16S" "./dist/D16S/D16S" "./build/D16S" "./D16S"; do
@@ -10,7 +25,7 @@ done
 
 TARGET_BINARY="${TARGET_BINARY:-./dist/D16S}"
 
-echo "(=^‥^=) iQxD operator sequence active (para0 mode: $PARA0_CHECKSUM_MODE) ->$TARGET_BINARY"
+echo "(=^‥^=) iQxD operator sequence active [$SCRIPT_NAME] (para0 mode: $PARA0_CHECKSUM_MODE) ->$TARGET_BINARY"
 
 if [ "$PARA0_CHECKSUM_MODE" -eq 0 ]; then
     echo "(=^ω^=) Checksum bypassed (mode 0)."
@@ -33,7 +48,6 @@ if [ ! -f "$TARGET_BINARY" ]; then
     exit 1
 fi
 
-# Only pipe exit if HEADLESS=1 is set. Otherwise, run interactively.
 if [ "${HEADLESS:-0}" -eq 1 ]; then
     printf "esc\n" | "$TARGET_BINARY" "$@"
 else
