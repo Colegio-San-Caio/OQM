@@ -9,7 +9,6 @@ start_daemon() {
         echo "(=^‥^=) Daemon already running."
     else
         echo "(=^ ◡ ^=) Starting daemon service..."
-        # Background loop or placeholder service
         while true; do
             sleep 60
         done &
