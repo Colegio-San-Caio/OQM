@@ -16,3 +16,5 @@ repo-activity.xml
 termuxDB.bin
 termuxDB.bin
 libomqqiskit.so
+.env
+*.log
