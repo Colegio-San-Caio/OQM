@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 set -e
+source ./css.iqxd
 
 PID_FILE=".daemon.pid"
 DAEMON_MODE="${DAEMON_MODE:-0}"
 
 start_daemon() {
     if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-        echo "(=^‥^=) Daemon already running."
+        echo -e "${OQM_WARN}(=^‥^=) Daemon already running.${OQM_RESET}"
     else
-        echo "(=^ ◡ ^=) Starting daemon service..."
+        echo -e "${OQM_PRIMARY}(=^ ◡ ^=) Starting daemon service...${OQM_RESET}"
         while true; do
             sleep 60
         done &
         echo $! > "$PID_FILE"
-        echo "(=^ω^=) Daemon started with PID $(cat "$PID_FILE")"
+        echo -e "${OQM_SUCCESS}(=^ω^=) Daemon started with PID$(cat "$PID_FILE")${OQM_RESET}"
     fi
 }
 
@@ -22,21 +23,21 @@ stop_daemon() {
         PID=$(cat "$PID_FILE")
         if kill -0 "$PID" 2>/dev/null; then
             kill "$PID"
-            echo "(=ΦωΦ=) Stopped daemon (PID $PID)"
+            echo -e "${OQM_SUCCESS}(=ΦωΦ=) Stopped daemon (PID $PID)${OQM_RESET}"
         else
-            echo "(=`ω´=) Stale PID file found."
+            echo -e "${OQM_WARN}(=`ω´=) Stale PID file found.${OQM_RESET}"
         fi
         rm -f "$PID_FILE"
     else
-        echo "(=`ω´=) Daemon is not running."
+        echo -e "${OQM_WARN}(=`ω´=) Daemon is not running.${OQM_RESET}"
     fi
 }
 
 status_daemon() {
     if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
-        echo "(=^..^=) DAEMON active [PID: $(cat "$PID_FILE")]"
+        echo -e "${OQM_SUCCESS}(=^..^=) DAEMON active [PID:$(cat "$PID_FILE")]${OQM_RESET}"
     else
-        echo "(=^..^=) DAEMON inactive."
+        echo -e "${OQM_WARN}(=^..^=) DAEMON inactive.${OQM_RESET}"
     fi
 }
 
