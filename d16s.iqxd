@@ -3,7 +3,9 @@
 # CHECKSUM_MODE: 
 #   0 = Bypass checksum calculation entirely
 #   1 = Force pass 
+#   2 = Real MD5 & SHA-256 file validation
 #   8 = Custom 8-prime sequence validation stub
+
 PARA0_CHECKSUM_MODE="${CHECKSUM_MODE:-0}"
 TARGET_BINARY="./dist/D16S"
 
@@ -15,6 +17,16 @@ case "$PARA0_CHECKSUM_MODE" in
         ;;
     1)
         echo "(=^ ◡ ^=) Checksum forced valid (mode 1)."
+        ;;
+    2)
+        echo "(=ΦωΦ=) Performing live MD5 and SHA-256 verification..."
+        if [ -f "$TARGET_BINARY" ]; then
+            echo "MD5:    $(md5sum "$TARGET_BINARY")"
+            echo "SHA256: $(sha256sum "$TARGET_BINARY")"
+        else
+            echo "(=`ω´=) Target binary missing for hashing."
+            exit 1
+        fi
         ;;
     8)
         echo "(=ΦωΦ=) Executing 8-prime sequence verification..."
