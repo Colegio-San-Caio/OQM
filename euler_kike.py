@@ -321,6 +321,24 @@ def run_x_drive_mount():
     input("\nPress Enter to return to main console...")
 
 
+
+def run_a_drive_mount():
+    import os
+    os.system("clear")
+    print("┌─────────────────────────────────────────────────────────────┐")
+    print("│ A: DRIVE — Infinite Channel A & Channel Infinity Gateway    │")
+    print("├─────────────────────────────────────────────────────────────┤")
+    print("│ > Volume Target    : A:\\ [Primordial Bootstrap & Sector 0] │")
+    print("│ > Channel Mapping  : Channel [0] to Channel [infinity]      │")
+    print("│ > Namespace Bridge : Linked to :ROOT: (Port 36883)            │")
+    print("│ > Isotropic Tensor : 1:1:1:1 Hyper-State Dynamic Loop       │")
+    print("│ > System Status    : INFINITE CHANNEL A ACTIVE [0x00]       │")
+    print("└─────────────────────────────────────────────────────────────┘")
+    print("\n[+] Initializing A: Drive as Infinite Channel gateway...")
+    print("[+] Channel A successfully bridged to recursive tensor limit.")
+    input("\nPress Enter to return to main console...")
+
+
 if __name__ == "__main__":
     while True:
         os.system("clear")
@@ -340,7 +358,7 @@ if __name__ == "__main__":
   [1] Launch QEMU     [3] Task Manager     [f] Defragment uni.ima
   [2] Run Audit       [4] emu_TM_D Suite   [5] OMQ Live Stream
   [6] KEKI Engine     [7] 2026 Epoch Tensor
-  [8] Mount X: Drive
+  [8] Mount X: Drive        [A] Drive (Channel A / Infinity)
   [9] :graphene Morse Socket
   [10] :i Decadic Channel [10]
   [11] Help          [12] Software      [13] Hardware
