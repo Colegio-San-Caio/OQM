@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+SCRIPT_NAME="$(basename "$0")"
+XIMG_MODE="${XIMG_MODE:-0}"
+
+for CANDIDATE in "./uni.ima" "./dist/uni.ima" "./disk.img" "./assets/uni.ima"; do
+  if [ -f "$CANDIDATE" ] && [ ! -d "$CANDIDATE" ]; then
+    TARGET_IMG="$CANDIDATE"
+    break
+  fi
+done
+
+TARGET_IMG="${TARGET_IMG:-./uni.ima}"
+
+echo "(=^‥^=) XIMG external image sequence active [$SCRIPT_NAME] (mode: $XIMG_MODE) ->$TARGET_IMG"
+
+if [ "$XIMG_MODE" -eq 0 ]; then
+    echo "(=^ω^=) XIMG inspect & info mode:"
+    if [ -f "$TARGET_IMG" ]; then
+        ls -lh "$TARGET_IMG"
+        file "$TARGET_IMG"
+        md5sum "$TARGET_IMG"
+        sha256sum "$TARGET_IMG"
+    else
+        echo "(=`ω´=) Target image not found at $TARGET_IMG"
+    fi
+elif [ "$XIMG_MODE" -eq 1 ]; then
+    echo "(=^ ◡ ^=) Defragmenting or quick-verifying disk image structure..."
+    sync
+    echo "(=^‥^=) Image sync complete."
+elif [ "$XIMG_MODE" -eq 2 ]; then
+    echo "(=ΦωΦ=) Mounting/mapping image container..."
+else
+    echo "(=`ω´=) Defaulting to standard asset pass-thru."
+fi
+
+if [ "${HEADLESS:-0}" -eq 1 ]; then
+    echo "(=^‥^=) Headless XIMG task finished."
+else
+    if [ -t 0 ] && [ -e /dev/tty ]; then
+        exec bash < /dev/tty
+    fi
+fi

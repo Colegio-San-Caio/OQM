@@ -11,7 +11,7 @@ done
 
 TARGET_BUFFER="${TARGET_BUFFER:-./buffer.img}"
 
-echo "(=^‥^=) OQM buffer sequence active [$SCRIPT_NAME] (buffer mode: $BUFFER_MODE) ->$TARGET_BUFFER"
+echo "(=^‥^=) OQM buffer sequence active [$SCRIPT_NAME] (buffer mode: $BUFFER_MODE) -> $TARGET_BUFFER"
 
 if [ "$BUFFER_MODE" -eq 0 ]; then
     echo "(=^ω^=) Buffer passthrough mode active (mode 0)."
@@ -24,14 +24,13 @@ elif [ "$BUFFER_MODE" -eq 2 ]; then
         md5sum "$TARGET_BUFFER"
         sha256sum "$TARGET_BUFFER"
     else
-        echo "(=`ω´=) Warning: Target buffer not found yet. Creating dummy..."
+        echo "(=`ω´=) Warning: Target buffer not found. Creating dummy..."
         touch "$TARGET_BUFFER"
     fi
 else
     echo "(=`ω´=) Defaulting to standard stream buffer."
 fi
 
-# Ensure buffer exists
 if [ ! -f "$TARGET_BUFFER" ]; then
     touch "$TARGET_BUFFER"
 fi
