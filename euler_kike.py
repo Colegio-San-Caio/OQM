@@ -303,6 +303,24 @@ def run_infinite_layer(layer_num):
     input("\nPress Enter to return to main console...")
 
 
+
+def run_x_drive_mount():
+    import os
+    os.system("clear")
+    print("┌─────────────────────────────────────────────────────────────┐")
+    print("│ X: DRIVE — External Volume & High-Capacity Storage Mount    │")
+    print("├─────────────────────────────────────────────────────────────┤")
+    print("│ > Volume Target    : X:\\ [KIKE.img / Virtual Isotropic Volume]│")
+    print("│ > Protocol / Bus   : USB 3.2 / SATA Native Bridge             │")
+    print("│ > Namespace Bridge : Linked to :ROOT: (Port 36883)            │")
+    print("│ > Active Image     : KIKE.img [10^9 x 10^9 Tensor Matrix]   │")
+    print("│ > Status           : MOUNTED & READ-WRITE [0x00]            │")
+    print("└─────────────────────────────────────────────────────────────┘")
+    print("\n[+] Mapping KIKE.img to X:\\ volume target...")
+    print("[+] Isotropic tensor state synchronized successfully.")
+    input("\nPress Enter to return to main console...")
+
+
 if __name__ == "__main__":
     while True:
         os.system("clear")
