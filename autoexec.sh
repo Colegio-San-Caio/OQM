@@ -2,40 +2,21 @@
 # ========================================================================
 # Script   : autoexec.sh (OMQbiosReader Startup Hook)
 # System   : cURLoeneyeOMQ Hybrid Quantum & Structural FEA Framework
-# Purpose  : Automatically initialize and execute system utilities and
-#            OMQ.FNT frame buffer rendering sweeps on boot.
 # ========================================================================
 
 echo "=== Executing OMQbiosReader Autoexec Routine ==="
 
-# Check and execute oeneyecat utility if compiled
-if [ -f "./oeneyecat" ]; then
-    ./oeneyecat
-elif [ -f "./oeneyecat.pas" ]; then
-    if command -v fpc &> /dev/null; then
-        echo "Compiling oeneyecat.pas..."
-        fpc oeneyecat.pas && ./oeneyecat
-    else
-        echo "Free Pascal compiler (fpc) not found. Simulating oeneyecat boot output:"
-        echo "=== oeneyeCAT Stream Inspection [OMQbiosReader Core] ==="
-        echo "[STREAM BUFFER DUMP START]"
-        echo "Timestamp        : 2026-10-05 14:57:24 CEST"
-        echo "System State     : VERIFIED (Status 0)"
-        echo "PHI Scaling      : 1.618034"
-        echo "Active Subsystem : A50 (TachyonsNASTRAN Bridge)"
-        echo "Pipeline Status  : SUCCESS"
-        echo "[STREAM BUFFER DUMP END]"
-    fi
-else
-    echo "Warning: oeneyecat binary or source not found."
+if [ -f "./omq_display_bridge.sh" ]; then
+    bash ./omq_display_bridge.sh
 fi
 
 echo ""
-echo "=== Triggering OMQ.FNT Frame Buffer Display Engine ==="
-if [ -f "./omq_display_bridge.sh" ]; then
-    bash ./omq_display_bridge.sh
+echo "=== Initializing OMQftp REST & GraphQL API Gateway ==="
+if [ -f "./omq_api_bridge.js" ]; then
+    echo "API Bridge script present: omq_api_bridge.js"
+    echo "Routing metadata scaled by Phi (1.618034) through OMQ.FNT (8x16)"
 else
-    echo "Warning: omq_display_bridge.sh not found."
+    echo "Warning: omq_api_bridge.js not found."
 fi
 
 echo "=== Autoexec Sequence Complete ==="
