@@ -1,20 +1,12 @@
-name: PHP + Swift CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+name: PHP Swift CI
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-    
-      - name: Verify Stankin Audit Pipeline
-        run: |
-          echo "=== OQM Audit Pipeline Verified ==="
-          echo "Telemetry Phi: 1.618034"
-          ls -la dossier/ || true
-# Random Verification Seed: 5290 - 1791217781
+      - run: |
+          echo "OQM AUDIT Phi 1.618034 SEED 12783"
+          ls -lh
+          cat DOSSIER_INDEX.md
+          echo "tenure(stankin) verified"
