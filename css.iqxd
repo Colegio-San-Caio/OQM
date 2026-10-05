@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# OQM Terminal Aesthetics & Styling Operator
+export OQM_THEME_PRIMARY="\033[1;36m"
+export OQM_THEME_SUCCESS="\033[1;32m"
+export OQM_THEME_WARN="\033[1;33m"
+export OQM_THEME_RESET="\033[0m"
+
+apply_theme() {
+    echo -e "${OQM_THEME_SUCCESS}(=^ω^=) OQM styling profile applied successfully.${OQM_THEME_RESET}"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    apply_theme
+fi
