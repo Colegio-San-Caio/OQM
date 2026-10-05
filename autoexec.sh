@@ -20,3 +20,11 @@ else
 fi
 
 echo "=== Autoexec Sequence Complete ==="
+
+# --- OMQ Font Renderer Startup Hook ---
+if [ -f "omq_font_renderer.py" ]; then
+    echo "[BOOT] Initializing OMQ.FNT bitmap font matrix renderer..."
+    python3 omq_font_renderer.py
+else
+    echo "[BOOT WARNING] omq_font_renderer.py not found in runtime path."
+fi
