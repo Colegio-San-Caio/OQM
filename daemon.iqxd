@@ -1,47 +1,48 @@
 #!/usr/bin/env bash
-SCRIPT_NAME="$(basename "$0")"
+set -e
+
+PID_FILE=".daemon.pid"
 DAEMON_MODE="${DAEMON_MODE:-0}"
-PID_FILE="./d16s_daemon.pid"
 
-echo "(=^‥^=) DAEMON operator active [$SCRIPT_NAME] (mode:$DAEMON_MODE)"
-
-if [ "$DAEMON_MODE" -eq 0 ]; then
-    echo "(=^ω^=) DAEMON status check:"
-    if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
-        echo "(=^ ◡ ^=) Daemon is running with PID $(cat "$PID_FILE")"
+start_daemon() {
+    if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+        echo "(=^‥^=) Daemon already running."
     else
-        echo "(=`ω´=) Daemon is stopped or PID file is stale."
-    fi
-elif [ "$DAEMON_MODE" -eq 1 ]; then
-    echo "(=^ ◡ ^=) Starting background telemetry/runtime loop..."
-    if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
-        echo "(=`ω´=) Daemon already running."
-    else
-        # Launch background background loop (e.g. wrapping dist/D16S or a socket listener)
-        nohup ./dist/D16S --daemon > ./d16s_daemon.log 2>&1 &
+        echo "(=^ ◡ ^=) Starting daemon service..."
+        # Background loop or placeholder service
+        while true; do
+            sleep 60
+        done &
         echo $! > "$PID_FILE"
-        echo "(=^‥^=) Daemon started with PID $(cat "$PID_FILE")."
+        echo "(=^ω^=) Daemon started with PID $(cat "$PID_FILE")"
     fi
-elif [ "$DAEMON_MODE" -eq 2 ]; then
-    echo "(=ΦωΦ=) Stopping daemon service..."
+}
+
+stop_daemon() {
     if [ -f "$PID_FILE" ]; then
-        TARGET_PID="$(cat "$PID_FILE")"
-        if kill -0 "$TARGET_PID" 2>/dev/null; then
-            kill "$TARGET_PID"
-            echo "(=^‥^=) Terminated process $TARGET_PID."
+        PID=$(cat "$PID_FILE")
+        if kill -0 "$PID" 2>/dev/null; then
+            kill "$PID"
+            echo "(=ΦωΦ=) Stopped daemon (PID $PID)"
+        else
+            echo "(=`ω´=) Stale PID file found."
         fi
         rm -f "$PID_FILE"
     else
-        echo "(=`ω´=) No active PID file found."
+        echo "(=`ω´=) Daemon is not running."
     fi
-else
-    echo "(=`ω´=) Default daemon pass-thru mode."
-fi
+}
 
-if [ "${HEADLESS:-0}" -eq 1 ]; then
-    echo "(=^‥^=) Headless DAEMON task finished."
-else
-    if [ -t 0 ] && [ -e /dev/tty ]; then
-        exec bash < /dev/tty
+status_daemon() {
+    if [ -f "$PID_FILE" ] && kill -0 $(cat "$PID_FILE") 2>/dev/null; then
+        echo "(=^..^=) DAEMON active [PID: $(cat "$PID_FILE")]"
+    else
+        echo "(=^..^=) DAEMON inactive."
     fi
-fi
+}
+
+case "$DAEMON_MODE" in
+    1) start_daemon ;;
+    2) stop_daemon ;;
+    *) status_daemon ;;
+esac
