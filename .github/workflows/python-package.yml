@@ -1,4 +1,4 @@
-name: Qiskit Bell Test
+nano .github/workflows/quantum.ymlnano .github/workflows/quantum.ymlname: Qiskit Bell Test
 
 on:
   push:
