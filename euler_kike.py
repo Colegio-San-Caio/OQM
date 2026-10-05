@@ -339,6 +339,23 @@ def run_a_drive_mount():
     input("\nPress Enter to return to main console...")
 
 
+
+def run_c_drive_emu():
+    import os
+    os.system("clear")
+    print("┌─────────────────────────────────────────────────────────────┐")
+    print("│ C: DRIVE — Local Emulated Environment (QEMU Core)           │")
+    print("├─────────────────────────────────────────────────────────────┤")
+    print("│ > Volume Target    : C:\\ [QEMU Virtualized Runtime Image]  │")
+    print("│ > Architecture     : x86 / Oeneye Tri-State Logic Core      │")
+    print("│ > Port Binding     : 36883 (:ROOT: Loopback Active)            │")
+    print("│ > Status           : EMU EMULATION ACTIVE [0x00]            │")
+    print("└─────────────────────────────────────────────────────────────┘")
+    print("\n[+] Initializing C: Drive QEMU emulation layer...")
+    print("[+] Virtualized storage space mapped successfully.")
+    input("\nPress Enter to return to main console...")
+
+
 if __name__ == "__main__":
     while True:
         os.system("clear")
@@ -358,7 +375,7 @@ if __name__ == "__main__":
   [1] Launch QEMU     [3] Task Manager     [f] Defragment uni.ima
   [2] Run Audit       [4] emu_TM_D Suite   [5] OMQ Live Stream
   [6] KEKI Engine     [7] 2026 Epoch Tensor
-  [8] Mount X: Drive        [A] Drive (Channel A / Infinity)
+  [8] Mount X: Drive        [C] Drive (QEMU Emu)        [A] Drive (Channel A / Infinity)
   [9] :graphene Morse Socket
   [10] :i Decadic Channel [10]
   [11] Help          [12] Software      [13] Hardware
