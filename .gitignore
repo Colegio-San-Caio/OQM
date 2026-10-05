@@ -15,3 +15,14 @@ qenv/
 __pycache__/
 *.pyc
 repo-activity.xml
+*.bin
+*.o
+*.so
+*.elf
+*.img
+*.zip
+*.log
+*.ima
+qenv/
+__pycache__/
+*.pyc
