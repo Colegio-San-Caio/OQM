@@ -375,7 +375,7 @@ def run_d_drive_auto_push():
     if gh_check == 0:
         print("[+] GitHub CLI (gh) authenticated. Syncing release tags...")
         os.system("git push origin main 2>/dev/null")
-        os.system('gh release create v1.0.ven --notes "Automated EulerKIKE Release State" --title "EulerKIKE Release Snapshot" 2>/dev/null || gh release upload v1.0.ven euler_kike.py --clobber 2>/dev/null')
+        os.system('gh release create v1.1.ven --notes "Automated EulerKIKE Release State" --title "EulerKIKE Release Snapshot" 2>/dev/null || gh release upload v1.1.ven euler_kike.py --clobber 2>/dev/null')
         print("[+] Release successfully synchronized to GitHub repository!")
     else:
         print("[+] Pushing standard payload to origin main...")
@@ -391,7 +391,7 @@ def run_channel_i_update():
     print("┌─────────────────────────────────────────────────────────────┐")
     print("│ CHANNEL i — Decadic Channel & Auto-Update Release Chain     │")
     print("├─────────────────────────────────────────────────────────────┤")
-    print("│ > Release Target   : https://github.com/clevjhon/OQM/v1.0   │")
+    print("│ > Release Target   : https://github.com/clevjhon/OQM/v1.1   │")
     print("│ > Sync Protocol    : Autonomous Release-Chain Watcher      │")
     print("│ > Port Binding     : 36883 (:ROOT: Telemetry Channel)       │")
     print("└─────────────────────────────────────────────────────────────┘")
@@ -403,8 +403,8 @@ def run_channel_i_update():
     
     gh_check = os.system("gh --version >/dev/null 2>&1")
     if gh_check == 0:
-        print("[+] GitHub CLI active. Synchronizing latest release asset v1.0...")
-        os.system("gh release download v1.0 --pattern 'D16S' --clobber 2>/dev/null")
+        print("[+] GitHub CLI active. Synchronizing latest release asset v1.1...")
+        os.system("gh release download v1.1 --pattern 'D16S' --clobber 2>/dev/null")
         print("[+] Channel i auto-update package successfully synchronized!")
     else:
         print("[+] Pulling latest release refs from origin main...")
@@ -418,7 +418,7 @@ if __name__ == "__main__":
         os.system("clear")
         print("""
 ┌─────────────────────────────────────────────────────────────┐
-│ EULER-KIKE v1.0 — Global OMQ Telemetry & Emulator Runtime   │
+│ EULER-KIKE v1.1 — Global OMQ Telemetry & Emulator Runtime   │
 ├──────────────────────────┬──────────────────────────────────┤
 │ SYSTEM STATUS            │ RUNTIME TELEMETRY                │
 │ SEED ACTIVE : 16544      │ QEMU Core      : [ READY  ]      │
