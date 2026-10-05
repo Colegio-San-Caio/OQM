@@ -33,5 +33,9 @@ if [ ! -f "$TARGET_BINARY" ]; then
     exit 1
 fi
 
-# Automatically pipe a clean exit command into the binary stdin to prevent EOFError crashes
-printf "esc\n" | "$TARGET_BINARY" "$@"
+# Only pipe exit if HEADLESS=1 is set. Otherwise, run interactively.
+if [ "${HEADLESS:-0}" -eq 1 ]; then
+    printf "esc\n" | "$TARGET_BINARY" "$@"
+else
+    exec "$TARGET_BINARY" "$@"
+fi
