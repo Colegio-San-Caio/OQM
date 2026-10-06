@@ -1,15 +1,10 @@
 #include <stdio.h>
-#include <unistd.h>
 
-int main(int argc, char *argv[]) {
-    char *args[argc + 1];
-    args[0] = "./dist/D16S";
-    for (int i = 1; i < argc; i++) {
-        args[i] = argv[i];
-    }
-    args[argc] = NULL;
+void __attribute__((constructor)) init_main_dll(void) {
+    printf("(=^ω^=) main.DLL (shared library) loaded successfully.\n");
+}
 
-    execvp(args[0], args);
-    perror("Failed to execute D16S");
-    return 1;
+int d16s_runtime_hook(void) {
+    printf("(=^ ◡ ^=) Executing D16S routine from shared object.\n");
+    return 0;
 }
