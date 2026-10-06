@@ -19,18 +19,19 @@ start_daemon() {
 }
 
 stop_daemon() {
-    if [ -f "$PID_FILE" ]; then
-        PID="$(cat "$PID_FILE")"
-        if kill -0 "$PID" 2>/dev/null; then
-            kill "$PID"
-            echo -e "${OQM_SUCCESS}(=ΦωΦ=) Stopped daemon (PID $PID)${OQM_RESET}"
-        else
-            echo -e "${OQM_WARN}(=`ω´=) Stale PID file found.${OQM_RESET}"
-        fi
-        rm -f "$PID_FILE"
-    else
+    if [ ! -f "$PID_FILE" ]; then
         echo -e "${OQM_WARN}(=`ω´=) Daemon is not running.${OQM_RESET}"
+        return
     fi
+    
+    PID="$(cat "$PID_FILE")"
+    if kill -0 "$PID" 2>/dev/null; then
+        kill "$PID"
+        echo -e "${OQM_SUCCESS}(=ΦωΦ=) Stopped daemon (PID $PID)${OQM_RESET}"
+    else
+        echo -e "${OQM_WARN}(=`ω´=) Stale PID file found.${OQM_RESET}"
+    fi
+    rm -f "$PID_FILE"
 }
 
 status_daemon() {
@@ -45,4 +46,4 @@ case "$DAEMON_MODE" in
     1) start_daemon ;;
     2) stop_daemon ;;
     *) status_daemon ;;
-esac
+es:
