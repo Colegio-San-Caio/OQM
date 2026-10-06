@@ -7,7 +7,8 @@ XIMG_DB="termuxdb.log"
 init_ximg() {
     if [ -f "$PID_FILE" ]; then
         CURRENT_PID=$(cat "$PID_FILE")
-        echo "PID:$CURRENT_PID | TIMESTAMP:$(date -u +"%Y-%m-%dT%H:%M:%SZ") | STATUS:ACTIVE" >> "$XIMG_DB"
+        TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        echo "PID:$CURRENT_PID | TIMESTAMP:$TIMESTAMP | STATUS:ACTIVE" >> "$XIMG_DB"
         echo -e "${OQM_SUCCESS}(=^ω^=) Recorded PID $CURRENT_PID to $XIMG_DB${OQM_RESET}"
     else
         echo -e "${OQM_WARN}(=`ω´=) No active PID file found.${OQM_RESET}"
