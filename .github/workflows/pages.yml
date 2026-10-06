@@ -18,12 +18,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Stage public files
-        run: |
-          mkdir _site
-          rsync -a --exclude '.git' --exclude '.github' \
-            --exclude '*.cfg' --exclude '*.sh' --exclude '_site' \
-            ./ _site/
+      - run: mkdir _site && cp index.html _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
