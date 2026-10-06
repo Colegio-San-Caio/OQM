@@ -9,6 +9,6 @@ if [ -f "./main.iqxd" ]; then
 elif [ -f "./main.c" ]; then
     cat ./main.c
 else
-    echo -e "${OQM_WARN}(=`ω´=) No main target found for User1 cat routine.${OQM_RESET}"
+    echo -e "${OQM_WARN}No main target found for User1 cat routine.${OQM_RESET}"
     exit 1
 fi
