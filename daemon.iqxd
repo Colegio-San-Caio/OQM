@@ -46,4 +46,4 @@ case "$DAEMON_MODE" in
     1) start_daemon ;;
     2) stop_daemon ;;
     *) status_daemon ;;
-es:
+esac
